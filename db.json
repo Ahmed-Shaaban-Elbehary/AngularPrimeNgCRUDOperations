@@ -13,20 +13,6 @@
         10
       ],
       "userType": "Admin"
-    },
-    {
-      "name": "Ahmed Shaaban",
-      "mobile": 1148177915,
-      "email": "xyz@mgail.com",
-      "gender": "Male",
-      "dob": "11/07/2022",
-      "id": 2,
-      "isActive": true,
-      "range": [
-        0,
-        10
-      ],
-      "userType": "Admin"
     }
   ]
 }

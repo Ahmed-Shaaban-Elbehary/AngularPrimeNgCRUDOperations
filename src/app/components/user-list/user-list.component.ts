@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit {
 
   remove(id: number) {
     this.userService.removeUser(id).subscribe(
-      (user) => this.userList = this.userList.filter( e => e.id !== user.id)
+      () => this.userList = this.userList.filter( e => e.id !== id)
     );
   }
 }
