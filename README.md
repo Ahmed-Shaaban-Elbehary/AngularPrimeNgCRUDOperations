@@ -37,3 +37,4 @@ Start JSON Server: `json-server --watch db.json`
 ## References 
 [PrimeNg](https://www.primefaces.org/primeng/)
 [Json-Server](https://www.npmjs.com/package/json-server)
+[Ankit Sahu](https://www.c-sharpcorner.com/blogs/angular-crud-operations#:~:text=CRUD%20is%20an%20acronym%20that,%2C%20read%2C%20update%20and%20delete.&text=Install%20PrimeNg%20for%20third%2Dparty%20controls.&text=Go%20to%20the%20app%20folder%20inside%20src%20and%20create%20the%20below%20files)
