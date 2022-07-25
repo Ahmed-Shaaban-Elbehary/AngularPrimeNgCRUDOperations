@@ -58,9 +58,13 @@ export class AddUserComponent implements OnInit {
       // true if any form validation fail
       return;
 
-    const d = this.datePipe.transform(this.userform.get('dob')?.value, 'dd/MM/yyyy');
-    console.log(d);
-    return;
+    //change Date Format
+    this.userform
+      .get('dob')
+      ?.setValue(
+        this.datePipe.transform(this.userform.get('dob')?.value, 'dd/MM/yyyy')
+      );
+
     if (this.userform.get('id')?.value === 0) {
       // on Create New User
       this.userService.addUser(this.userform.value).subscribe();
@@ -69,7 +73,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .updateUser(this.userform.value)
         .subscribe((user) => this.userform.setValue(user));
-      console.log(this.userform);
     }
 
     //Redirecting to user List page after save or update
