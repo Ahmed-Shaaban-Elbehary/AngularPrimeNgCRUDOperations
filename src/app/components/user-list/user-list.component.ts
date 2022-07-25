@@ -8,13 +8,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  userList: User[] = [];
+  userList: User[];
   first = 0;
   rows = 10;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userList = this.userService.getUsers();
+    this.userService.getUsers().subscribe((user) => (this.userList = user));
   }
 
   /**************** PrimeNG DataTable Pagination ***********************/
@@ -38,7 +38,8 @@ export class UserListComponent implements OnInit {
   /***************************************************************/
 
   remove(id: number) {
-    this.userService.removeUser(id);
-    this.userList = this.userService.getUsers();
-}
+    this.userService.removeUser(id).subscribe(
+      (user) => this.userList = this.userList.filter( e => e.id !== user.id)
+    );
+  }
 }

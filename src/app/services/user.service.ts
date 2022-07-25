@@ -1,42 +1,69 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+
+import { catchError, Observable, throwError } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private userList: User[] = [
-    {
-      id: 1,
-      name: 'Ankit Sahu',
-      dob: new Date('08/31/1992'),
-      email: 'ankit@gmail.com',
-      gender: 'Male',
-      mobile: '8978786933',
-      isActive: false,
-      range: [0, 10],
-      userType: 'Admin',
-    },
-  ];
-  constructor() { }
+  private baseUrl = 'http://localhost:3000/user';
 
-  getUsers() {
-    return this.userList;
+  constructor(private httpClient: HttpClient) {}
+
+  getUsers(): Observable<User[]> {
+    return this.httpClient
+      .get<User[]>(this.baseUrl)
+      .pipe(catchError(this.handleError));
   }
-  getUsersByID(id: number) {
-    return this.userList.find((x) => x.id == id);
+
+  getUsersByID(id: number): Observable<User> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.httpClient
+      .get<User>(url)
+      .pipe(catchError(this.handleError));
   }
-  addUser(user: User) {
-    user.id = new Date().getTime();
-    this.userList.push(user);
+
+  addUser(user: User): Observable<User> {
+    return this.httpClient
+      .post<User>(this.baseUrl, user)
+      .pipe(catchError(this.handleError));
   }
-  updateUser(user: User) {
-    const userIndex = this.userList.findIndex((x) => x.id == user.id);
-    if (userIndex != null && userIndex != undefined) {
-      this.userList[userIndex] = user;
+
+  updateUser(user: User): Observable<User> {
+    const url = `${this.baseUrl}/${user.id}`
+    return this.httpClient
+      .put<User>(url, user, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  removeUser(id: number): Observable<User> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.httpClient
+      .delete<User>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Handle API errors
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
-  }
-  removeUser(id: number) {
-    this.userList = this.userList.filter((x) => x.id != id);
+    return throwError(() => error);
   }
 }

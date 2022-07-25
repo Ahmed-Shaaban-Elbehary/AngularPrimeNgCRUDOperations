@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { RouterModule, Routes } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,11 +43,12 @@ const routes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
 
 
-  providers: [UserService],
+  providers: [UserService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

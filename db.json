@@ -1,0 +1,32 @@
+{
+  "user": [
+    {
+      "name": "Ankit Sahu",
+      "mobile": 8978786933,
+      "email": "ankit@gmail.com",
+      "gender": "Male",
+      "dob": "2022-07-06T22:00:00.000Z",
+      "id": 1,
+      "isActive": true,
+      "range": [
+        0,
+        10
+      ],
+      "userType": "Admin"
+    },
+    {
+      "name": "Ahmed Shaaban",
+      "mobile": 1148177915,
+      "email": "xyz@mgail.com",
+      "gender": "Male",
+      "dob": "2022-07-30T22:00:00.000Z",
+      "id": 2,
+      "isActive": true,
+      "range": [
+        0,
+        10
+      ],
+      "userType": "Admin"
+    }
+  ]
+}
